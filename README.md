@@ -1,50 +1,9 @@
-# Welcome to your Expo app 👋
+Expo app cannot compile for iPhone Simulator 17.4 with using Expo 51 beta, latest expo-dev-client, and JSC. Have not tested using a device SDK instead of the Simulator SDK.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Steps to reproduce:**
+1. Initialize a new project with SDK 51 beta: `npx create-expo-app@latest --template default@beta`
+2. Specify `jsc` as the iOS or project `jsEngine`
+3. Install latest expo-dev-client: `npx expo install expo-dev-client`
+4. Attempt to run the app `npx expo run:ios --device`
 
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/learn): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Note: tying down the `expo-dev-menu` version to `5.0.3` via resolutions in package.json clears the issue. I think it is reasonable to assume this commit is the problematic one: https://github.com/expo/expo/commit/616efad308dc1d52713989a00a68aebdc4270092
